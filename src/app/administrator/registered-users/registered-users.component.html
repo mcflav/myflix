@@ -1,0 +1,11 @@
+<h2>System Administrator Page</h2>
+
+<div class="panel panel-default">
+        <div class="panel-heading">Registered Users</div>
+        <div class="panel-body" *ngFor="let user of users">
+            <p appHighlight >
+                <strong style="color: red">{{ user.firstname }}</strong>
+            </p>
+        </div>
+        
+</div>
