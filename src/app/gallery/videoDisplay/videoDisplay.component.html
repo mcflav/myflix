@@ -1,0 +1,19 @@
+<div class="row">
+    <div class="col-xs-12">
+        <p>NDO Films Movie Selection.</p>
+        <label>Title: {{ video.title }}</label><br>
+        <label>Producer: {{ video.producer }}</label><br>
+        <label>Director: {{ video.director }}</label><br>
+        <label>Actors: {{ video.actors }}</label><br>
+        <label>Description: {{ video.description }}</label>
+        <hr>        
+        <video controls width="820" height="440">
+            <!-- <source src="../../assets/terry1.mp4" type="video/mp4"> -->
+            <source src="{{ filePath }}" type="video/mp4">
+                <source src="movie.ogg" type="video/ogg">
+                Your browser does not support the video tag.
+        </video>
+
+        <!-- <source src="../../assets/MainVidNdo.mp4" type="video/mp4"> -->
+    </div>
+</div>
