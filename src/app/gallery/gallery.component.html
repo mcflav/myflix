@@ -1,51 +1,24 @@
 <!DOCTYPE html>
 <html>
 <body oncontextmenu="return false;">
+    <div>
+        <hr>
+        <a (click)="goToPlans()" style="cursor: pointer;">Plans</a>
+    </div>
         <h1>NDO Films Gallery</h1>
+        <h5>Welcome {{ this.user.firstname + ' ' + this.user.lastname}}</h5>
         <div class="containerGallery">
             <div>
-                <a [routerLink]="['/gallery/Flesh/Terry Barnes/Terry Barnes/Madison, Brandon Grier, Chris Miller/
-                A horror suspense series that entangles the ugly world of sex trafficking met with supernatural consequences./terry1.mp4']">
+                <a *ngFor="let video of videos; let i = index" (click)="goToVideoDisplay(video.id)" style="cursor: pointer;" >
                     <figure>
                         <img src="../../assets/thumb.png" alt="movie thumbnail" style="width:60px">
-                        <figcaption>Flesh</figcaption>
+                        <figcaption>{{ video.title }}</figcaption>
                     </figure>
                 </a>
             </div>
-            <div>
-                <a href="#">
-                    <figure>
-                        <img src="../../assets/thumb.png" alt="movie thumbnail" style="width:60px">
-                        <figcaption>Bear Country</figcaption>
-                    </figure>
-                </a>
-            </div>
-            
-            <!-- Video code -->
-            <!-- <div>
-                <h1>Video 3</h1>
-                <video controls controlsList="nodownload" poster="/Images/images.png" width="140" height="140">
-                    <source src="Videos/terry2.mp4" type="video/mp4">
-                    <!-- <source src="movie.ogg" type="video/ogg"> -->
-                    <!-- Your browser does not support the video tag.
-                </video>
-            </div> -->
-            <!-- <div>
-                <h1>Video 4</h1>
-                <video controls controlsList="nodownload" poster="/Images/images.png" width="140" height="140">
-                    <source src="Videos/terry2.mp4" type="video/mp4"> -->
-                    <!-- <source src="movie.ogg" type="video/ogg"> -->
-                    <!-- Your browser does not support the video tag.
-                </video> -->
-            <!-- </div>
-            <div>
-                <h1>Video 5</h1>
-                <video controls controlsList="nodownload" poster="/Images/images.png" width="140" height="140"> -->
-                    <!-- <source src="Videos/terry2.mp4" type="video/mp4"> -->
-                    <!-- <source src="movie.ogg" type="video/ogg"> -->
-                    <!-- Your browser does not support the video tag.
-                </video>
-            </div> -->
+        </div>
+        <div>
+            <router-outlet></router-outlet>
         </div>
     </body>
 </html> 

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<body oncontextmenu="return false;">
+    <div>
+        <hr>
+        <a (click)="goToPlans()" style="cursor: pointer;">Plans</a>
+    </div>
+        <h1>NDO Films Trailers</h1>
+        <h5>Welcome {{ this.user.firstname + ' ' + this.user.lastname}}</h5>
+        <div class="containerTrailers">
+            <div>
+                <a *ngFor="let video of videos; let i = index" (click)="goToVideoDisplay(video.id)" style="cursor: pointer;" >
+                    <figure>
+                        <img src="../../assets/thumb.png" alt="movie thumbnail" style="width:60px">
+                        <figcaption>{{ video.title }}</figcaption>
+                    </figure>
+                </a>
+            </div>
+        </div>
+        <div>
+            <router-outlet></router-outlet>
+        </div>
+    </body>
+</html> 
