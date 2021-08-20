@@ -62,8 +62,10 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "myflix:build"
+            "browserTarget": "myflix:build",
+            "proxyConfig": "src/proxy.conf.json"
           },
+          
           "configurations": {
             "production": {
               "browserTarget": "myflix:build:production"

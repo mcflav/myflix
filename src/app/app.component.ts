@@ -1,27 +1,60 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription} from 'rxjs';
+import { DataStorageService } from './services/data-storage.service';
+import { UsersService } from './services/users.service';
+import { Order } from './models/order.model';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  collapsed = true;
-  movies = [{genre: 'horror', name: 'Sleepers Awake', description: 'A bizarre thriller of one unlucky movie goer.'}];
+export class AppComponent implements OnInit, OnDestroy {
+  //collapsed = true;
+  account: {email: string, firstname: string, lastname: string};
+  isAuthenticated = false;
+  private userSub: Subscription;
+  email;
+  firstname;
+  lastname;
+  planType;
+  order: Order[];
 
-  onMovieAdded(movieData: {movieName: string, movieDescription: string}) {
-    this.movies.push({
-      genre: 'horror',
-      name: movieData.movieName,
-      description: movieData.movieDescription
+  constructor(private dataStorageService: DataStorageService,
+    private usersService: UsersService,
+    private router: Router,
+    private route: ActivatedRoute){}
+
+  ngOnInit(){
+    this.account = {
+      email: this.route.snapshot.params['email'],
+      firstname: this.route.snapshot.params['firstname'],
+      lastname: this.route.snapshot.params['lastname']
+
+    }
+
+    this.userSub = this.dataStorageService.user.subscribe(user => {
+      this.isAuthenticated = !user ? false: true;
     });
+
+    this.dataStorageService.autoLogin();
+
+    // this.dataStorageService.fetchOrder().subscribe(
+    //   resData => {
+    //     console.log(resData);
+    //    // this.order = resData;
+    //     resData
+    //   }
+    //   );
+
   }
 
-  // onVideoAdded() {
-  //   this.videos.push({
-  //     genre: this.videos[0],
-  //     name:  this.videos[1],
+  onLogOut(){
+    this.dataStorageService.logOut();
+  }
 
-  //   })
-  // }
+  ngOnDestroy(){
+    this.userSub.unsubscribe();
+  }
 }

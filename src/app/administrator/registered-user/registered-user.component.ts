@@ -19,13 +19,15 @@ export class RegisteredUserComponent implements OnInit {
       id: this.route.snapshot.params['id'],
       name: this.route.snapshot.params['name']
     };
-    this.route.params
-      .subscribe(
-        (params: Params) => {
-          this.user.id = params['id'];
-          this.user.name = params['name'];
-        }
-      );
+    
+     console.log(this.user.id);
+    // this.route.params
+    //   .subscribe(
+    //     (params: Params) => {
+    //       this.user.id = params['id'];
+    //       this.user.name = params['name'];
+    //     }
+    //   );
   }
 
 }

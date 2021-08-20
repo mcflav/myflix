@@ -1,0 +1,14 @@
+h1{
+    text-align: center;
+}
+
+.containerTrailers {
+    background-color: darkkhaki;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+figure{
+    padding: 20px;
+}

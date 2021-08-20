@@ -1,0 +1,82 @@
+<div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+<div class="alert alert-danger" *ngIf="error">
+    <p>{{ error }}</p>
+</div>
+<div *ngIf="isLoading" style="text-align: center">
+    <app-loading-spinner></app-loading-spinner>
+</div>
+<form (ngSubmit)="onSubmit()" #f="ngForm">
+    <h4><u>NDO Films Plans</u></h4>
+    <hr>
+    <div class="form-group">
+    <section id='subscription'>
+        <p><strong>One Level Subscription - </strong> $5 or $4 with promo code. Pay 6 months in 
+            advance - $30 ($24 with promo code) or 
+            1 year in adance - $60 ($48 with promo code)
+        </p>
+    </section>
+    <section id='level' class="form-group">
+        <input
+             type="radio"
+             value="1month" 
+             name="level" 
+             required   
+             ngModel
+             #level="ngModel"
+             (change)="changePlan($event)"> 1 mo. All Access - $5.00 ($4.00 w/ Promo Code) <br> 
+        <input 
+             type="radio" 
+             value="6months"
+             name="level" 
+             required
+             ngModel 
+             #level="ngModel" 
+             (change)="changePlan($event)"> 6 mo. All Access - $30.00 ($24.00 w/ Promo Code) <br>
+        <input 
+             type="radio"
+             value="1year" 
+             name="level"
+             required 
+             ngModel 
+             #level="ngModel"
+             (change)="changePlan($event)"> 1 yr. All Access - $60.00 ($48.00 w/ Promo Code) <br>
+        <input 
+             type="radio"
+             value="noPlan" 
+             name="level"
+             required 
+             ngModel 
+             #level="ngModel"
+             (change)="changePlan($event)"> I do not want to subscribe to a plan today. 
+        <hr>
+    </section>
+    <hr>
+    <div>
+        <h3>** If no plan selected you can only view Trailers **</h3>
+    </div>
+    <hr>
+    <section id='access'>
+        <ul>
+            <li>Unlimited Access to 24/7 tv (scheduled programs).</li>
+            <li>Access to our gallery of the hottest HD features films, and short films.</li>
+            <li>Other high quality content from podcast to music videos.</li>
+            <li>Premiere new content of new creators not available on other platforms.</li>
+        </ul>
+    </section>
+    <hr>
+    <label for="promoCode">Promo Code: </label>
+    <input 
+        type="text" 
+        id="promoCode"
+        ngModel
+        name="promoCode"
+        #promoCode="ngModel">
+    <hr>
+    <button class="btn btn-primary" type="submit" [disabled]="level.invalid">Submit</button>
+    </div>
+</form>
+</div>
+</div>
+</div>
