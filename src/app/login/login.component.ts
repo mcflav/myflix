@@ -58,10 +58,14 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(){
+
+   // this.router.navigate(['../gallery', "test1@gmail.com", "firstname", "lastname"], {relativeTo: this.route});
+         
     this.hasPlan = false;
     this.isLoading = true;
     this.user.email = this.loginForm.value.email;
     this.user.password = this.loginForm.value.password;
+
     this.dataStorageService.validateUser(this.user.email, this.user.password)
       .subscribe(data => {
           this.isLoading = false;
@@ -95,6 +99,7 @@ export class LoginComponent implements OnInit {
                this.subscriberService.setOrder(data);
                 this.subscriptions = this.subscriberService.getOrders();
                 for(var i = 0; i < this.subscriptions.length; i++){
+                    console.log(this.subscriptions[i].planType);
                     if(this.subscriptions[i].email === this.user.email && this.subscriptions[i].planType !== "noPlan"){
                         this.planDateForSix = new Date(this.subscriptions[i].planDate);
                         this.planDateForOne = new Date(this.subscriptions[i].planDate);
@@ -124,7 +129,9 @@ export class LoginComponent implements OnInit {
                         
                     }
                 }
-               
+
+                //this.router.navigate(['../gallery', this.user.email, this.user.firstname, this.user.lastname], {relativeTo: this.route});
+                               
                 if(this.hasPlan === true && this.planType === "1mth" && this.today >= this.oneMonthExpirationDate){
                     this.router.navigate(['../plans', this.user.email, this.user.firstname, this.user.lastname], {relativeTo: this.route});
                 }else if(this.hasPlan === true && this.planType === "6mths" && this.today >= this.sixMonthExpirationDate){

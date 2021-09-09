@@ -12,7 +12,7 @@ import { ProducersComponent } from "./producers.component";
     imports: [
         FormsModule,
         SharedModule,
-        RouterModule.forChild([{ path: 'producers', component: ProducersComponent },])
+        RouterModule.forChild([{ path: '', component: ProducersComponent },])
     ]
 })
 export class ProducersModule{}

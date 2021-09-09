@@ -6,10 +6,10 @@ import { GalleryVideoComponent } from "./gallery-video/gallery-video.component";
 import { GalleryComponent } from "./gallery.component";
 
 const routes: Routes = [
-    { path: 'gallery/:email/:firstname/:lastname', component: GalleryComponent, canActivate: [AuthGuard] },
+    { path: '', component: GalleryComponent, canActivate: [AuthGuard] },
     { path: 'videoGallery', component: GalleryVideoComponent, children:[
-        { path: ':id', component: GalleryVideoDisplayComponent, canActivate: [AuthGuard] }
-      ] }   
+        { path: ':id/:email/:firstname/:lastname', component: GalleryVideoDisplayComponent, canActivate: [AuthGuard] },
+    ] }   
 ]
 
 @NgModule({

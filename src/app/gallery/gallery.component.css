@@ -1,14 +1,54 @@
 h1{
     text-align: center;
+    color:lightblue;
 }
 
-.containerGallery {
-    background-color: darkkhaki;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+h2{
+    margin-top:0px;
+    background-color: blue;
+    padding-bottom: 5px;
+    color: lightblue;
+    padding-left: 25px;
+}
+
+.plans{
+    color: blue;
+    border: solid 2px blue;
+    border-radius: 5px;
+    width: 20px;
+    height: 20px;
+    background-color: lightblue;
+    margin-left: 20px;
+    padding: 5px;
+    font-size:medium;
+    font-weight:bolder;
+}
+
+.form-group{
+    width: 200px;
+    margin: 0 auto;
+}
+
+body{
+    background-image: url("../../assets/gallery.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color:red;
+    background-size: cover;
+    margin-top: -10px;
+    padding-top: 25px;
 }
 
 figure{
     padding: 20px;
+}
+
+.containerGallery{
+    margin: 0 auto;
+    padding-bottom: 30px;
+    margin-top: 50px;
+}
+
+figcaption{
+    color:lightblue;
 }

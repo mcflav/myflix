@@ -7,18 +7,21 @@
             <!-- <a routerLink="/" class="navbar-brand">MyFlix</a> -->
         </div>
        <!-- <div class="navbar-collapse" [class.collapse]="collapsed" (window:resize)="collapsed = true"> -->
-            <ul class="nav navbar-nav">
-                <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/">Home</a></li>
-                <li role="presentation" routerLinkActive="active" *ngIf="!isAuthenticated"><a routerLink="/register">Register</a></li>
-                <li role="presentation" routerLinkActive="active"><a routerLink="/login"*ngIf="!isAuthenticated">Log In</a></li>
-                <li role="presentation" routerLinkActive="active"><a routerLink="/producers" *ngIf="!isAuthenticated">Producer Setup</a></li>
-                <li role="presentation" routerLinkActive="active"><a routerLink="/administrator" *ngIf="!isAuthenticated">System Administrator</a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li role="presentation" routerLinkActive="active"><a routerLink="/creators" *ngIf="isAuthenticated">Creators</a></li>
-                <li role="presentation" routerLinkActive="active"><a routerLink="/about" *ngIf="isAuthenticated">About</a></li>
-                <li role="presentation" routerLinkActive="active"><a (click)="onLogOut()" style="cursor: pointer" *ngIf="isAuthenticated">Log Out</a></li>
-            </ul>
+            <div class="menu">
+                <ul class="nav navbar-nav">
+                    <!-- <li><a style="color:darkblue">Home</a></li> -->
+                    <!-- <li role="presentation" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}"><a routerLink="/" style="color:darkblue">Home</a></li> -->
+                    <li role="presentation" routerLinkActive="active" *ngIf="!isAuthenticated"><a routerLink="/register" style="color:darkblue">Register</a></li>
+                    <li role="presentation" routerLinkActive="active"><a routerLink="/login"*ngIf="!isAuthenticated" style="color:darkblue">Log In</a></li>
+                    <li role="presentation" routerLinkActive="active"><a routerLink="/producers" *ngIf="!isAuthenticated" style="color:darkblue">Producer Setup</a></li>
+                    <li role="presentation" routerLinkActive="active"><a routerLink="/administrator" *ngIf="!isAuthenticated" style="color:darkblue">System Administrator</a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li role="presentation" routerLinkActive="active"><a routerLink="/creators" *ngIf="isAuthenticated" style="color:darkblue">Creators</a></li>
+                    <li role="presentation" routerLinkActive="active"><a routerLink="/about" *ngIf="isAuthenticated" style="color:darkblue">About</a></li>
+                    <li role="presentation" routerLinkActive="active"><a (click)="onLogOut()" style="cursor: pointer; color: darkblue;" *ngIf="isAuthenticated">Log Out</a></li>
+                </ul>
+            </div>
         <router-outlet></router-outlet>
         </div>
 </nav>

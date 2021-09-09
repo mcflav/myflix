@@ -6,6 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./producers.component.css']
 })
 export class ProducersComponent implements OnInit {
+  error: string = null;
+  isLoading;
 
   constructor() { }
 

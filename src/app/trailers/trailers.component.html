@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
-<body oncontextmenu="return false;">
-    <div>
-        <hr>
-        <a (click)="goToPlans()" style="cursor: pointer;">Plans</a>
-    </div>
-        <h1>NDO Films Trailers</h1>
-        <h5>Welcome {{ this.user.firstname + ' ' + this.user.lastname}}</h5>
+    <header>
+        <h2>
+            NDO Filmz Trailers
+        </h2>
+    </header>
+<body>
+    <br>
+      <a (click)="goToPlans()" style="cursor: pointer;" class="plans">Plans</a>
+      <h1>Welcome {{ this.user.firstname + ' ' + this.user.lastname}}</h1>
         <div class="containerTrailers">
             <div>
                 <a *ngFor="let video of videos; let i = index" (click)="goToVideoDisplay(video.id)" style="cursor: pointer;" >
@@ -20,5 +22,5 @@
         <div>
             <router-outlet></router-outlet>
         </div>
-    </body>
+</body>
 </html> 

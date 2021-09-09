@@ -3,8 +3,9 @@ import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
 import { SharedModule } from "../shared.module";
 import { LoginComponent } from "./login.component";
+import { ShowHidePasswordModule } from "ngx-show-hide-password";
 
-NgModule({
+@NgModule({
     declarations: [
         LoginComponent
     ],
@@ -12,7 +13,8 @@ NgModule({
     imports: [
         FormsModule,
         SharedModule,
-        RouterModule.forChild([{ path: 'login', component: LoginComponent },])
+        ShowHidePasswordModule,
+        RouterModule.forChild([{ path: '', component: LoginComponent },])
 
     ]
 })

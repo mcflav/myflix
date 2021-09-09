@@ -45,7 +45,7 @@ export class GalleryComponent implements OnInit {
 
     goToVideoDisplay(id: number){
        // this.router.navigate(['/video'], {relativeTo: this.route, queryParamsHandling: 'preserve'});
-         this.router.navigate(['/videoGallery', id], {relativeTo: this.route, queryParamsHandling: 'preserve'});
+         this.router.navigate(['/videoGallery', id, this.user.email, this.user.firstname, this.user.lastname], {relativeTo: this.route, queryParamsHandling: 'preserve'});
     }
 }
 
