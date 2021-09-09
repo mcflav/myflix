@@ -1,24 +1,21 @@
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { RouterModule } from "@angular/router";
+import { ShowHidePasswordModule } from "ngx-show-hide-password";
 import { SharedModule } from "../shared.module";
-import { AdministratorRoutingModule } from "./administrator-routing.module";
 import { AdministratorComponent } from "./administrator.component";
-import { RegisteredUserComponent } from "./registered-user/registered-user.component";
-import { RegisteredUsersComponent } from "./registered-users/registered-users.component";
 
 @NgModule({
     declarations: [
-        AdministratorComponent,
-        RegisteredUsersComponent,
-        RegisteredUserComponent
+        AdministratorComponent
     ],
 
     imports: [
         FormsModule,
         SharedModule,
-        RouterModule,
-        AdministratorRoutingModule
+        ShowHidePasswordModule,
+        RouterModule.forChild([{ path: '', component: AdministratorComponent }])
+        
     ]
 })
 export class AdministratorModule{}

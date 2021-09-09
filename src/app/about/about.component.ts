@@ -13,8 +13,8 @@ export class AboutComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  goHome(){
-      this.router.navigate(['']);
-  }
+  // goHome(){
+  //     this.router.navigate(['']);
+  // }
 
 }

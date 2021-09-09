@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SubscriberService } from '../services/subscriber.service';
 import { Order } from '../models/order.model';
 import { DataStorageService } from '../services/data-storage.service';
+import { stringify } from '@angular/compiler/src/util';
 
 
 @Component({
@@ -66,6 +67,43 @@ export class PlansComponent implements OnInit {
         // }
       })
    }
+
+  onGoToVideos(){
+    const planDateForSix = new Date(this.currentPlanDate);
+    const planDateForOne = new Date(this.currentPlanDate);
+    const planDateForYear = new Date(this.currentPlanDate);
+
+    this.planDate = new Date();
+
+    const addSix = planDateForSix.getMonth();
+    const sixMonthExpirationDate = planDateForSix;
+    sixMonthExpirationDate.setMonth(6 + Number(addSix));
+
+    const addOne = planDateForOne.getMonth();
+    const oneMonthExpirationDate = planDateForOne;
+    oneMonthExpirationDate.setMonth(1 + Number(addOne));
+    
+
+    const addYear = planDateForYear.getMonth();
+    const oneYearExpirationDate = planDateForYear;
+    oneYearExpirationDate.setMonth(12 + Number(addYear));
+
+    const planDateinDb = this.currentPlanDate;
+    
+    if(this.currentPlanType === "1month" && this.today >= oneMonthExpirationDate){
+      this.error = "Your 1 month subscription has expired. Please select a plan or select the option not to subscribe to a plan.";
+    }else if(this.currentPlanType === "6months" && this.today >= sixMonthExpirationDate){
+      this.error = "Your 6 months subscription has expired. Please select a plan or select the option not to subscribe to a plan.";
+    }else if(this.currentPlanType === "1year" && this.today >= oneYearExpirationDate){
+      this.error = "Your 1 year subscription has expired. Please select a plan or select the option not to subscribe to a plan.";
+    }else if(this.currentPlanType === "1month" || this.currentPlanType === "6months" || this.currentPlanType === "1year"){
+      this.router.navigate(['../gallery', this.account.email, this.account.firstname, this.account.lastname]);
+    } else if(this.currentPlanType === "noPlan"){
+      this.error = "You have not selected a plan for your account. Please select a plan or select not to subscribe to a plan."
+    } else {
+
+    }
+  }   
 
   onSubmit(){
    this.error = null;
@@ -134,34 +172,32 @@ export class PlansComponent implements OnInit {
    const planDateForOne = new Date(this.currentPlanDate);
    const planDateForYear = new Date(this.currentPlanDate);
 
-   const addSix = this.planDate.getMonth();
+   const addSix = planDateForSix.getMonth();
    const sixMonthExpirationDate = planDateForSix;
    sixMonthExpirationDate.setMonth(6 + Number(addSix));
 
-   const addOne = this.planDate.getMonth();
+   const addOne = planDateForOne.getMonth();
    const oneMonthExpirationDate = planDateForOne;
    oneMonthExpirationDate.setMonth(1 + Number(addOne));
-
-   const addYear = this.planDate.getMonth();
+         
+   const addYear = planDateForYear.getMonth();
    const oneYearExpirationDate = planDateForYear;
    oneYearExpirationDate.setMonth(12 + Number(addYear));
 
    const planDateinDb = this.currentPlanDate;
 
-   console.log( " With 6 months added to Plan in DB " + sixMonthExpirationDate);
-   console.log( " With 1 month added to Plan in DB " + oneMonthExpirationDate);
-   console.log( " With 1 year added to Plan in DB " + oneYearExpirationDate);
-   console.log("Plan date in Database: " + planDateinDb);
-
    if(this.currentPlanType === "1month" && this.today < oneMonthExpirationDate){
       this.error = "Your current 1 month plan subscription is still active. " +
       "It expires on " + oneMonthExpirationDate;
+      this.isLoading = false;
    }else if(this.currentPlanType === "6months" && this.today < sixMonthExpirationDate){
-    this.error = "Your current 6 months plan subscription is still active. " +
+      this.error = "Your current 6 months plan subscription is still active. " +
       "It expires on " + sixMonthExpirationDate;
+      this.isLoading = false;
    }else if(this.currentPlanType === "1year" && this.today < oneYearExpirationDate){
-    this.error = "Your current 1 year plan subscription is still active. " +
+      this.error = "Your current 1 year plan subscription is still active. " +
       "It expires on " + oneYearExpirationDate;
+      this.isLoading = false;
    }else if((this.currentPlanType === "1month" && this.today >= oneMonthExpirationDate) ||
    (this.currentPlanType === "6months" && this.today >= sixMonthExpirationDate) ||
    (this.currentPlanType === "1Year" && this.today >= oneYearExpirationDate)){
@@ -175,13 +211,19 @@ export class PlansComponent implements OnInit {
    }
 }
 
+
  UpdateSubscription(){
   this.dataStorageService.updateSubscription(this.subscriptId, this.newOrder)
   .subscribe(
       resData => {
         this.isLoading = false;
-        this.router.navigate(['../gallery', this.account.email, this.account.firstname, this.account.lastname])
-        this.orderSubmitted = true;
+        if(this.planType === "noPlan"){
+          this.router.navigate(['../trailers', this.account.email, this.account.firstname, this.account.lastname]);
+          this.orderSubmitted = true; 
+        }else{
+          this.router.navigate(['../gallery', this.account.email, this.account.firstname, this.account.lastname]);
+          this.orderSubmitted = true;
+        }
       },
       errorMessage => {
           this.isLoading = false;
@@ -194,4 +236,8 @@ export class PlansComponent implements OnInit {
   changePlan(e){
     this.planType = e.target.value;
   }
+
+  onHandleError(){
+    this.error = null;
+}
 }

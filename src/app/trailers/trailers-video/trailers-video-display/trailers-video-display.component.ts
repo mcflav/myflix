@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TrailerVideosService } from '../../../services/trailerVideos.service';
 
 
@@ -12,9 +12,11 @@ import { TrailerVideosService } from '../../../services/trailerVideos.service';
 export class TrailersVideoDisplayComponent implements OnInit {
      video: {id: number, title: string, producer: string, director: string, actors: string, description: string, source: string};
      id: number;
+     user: {email: string, firstname: string, lastname: string};
     
      constructor(private route: ActivatedRoute,
-     private trailerVideosService: TrailerVideosService) { }
+     private trailerVideosService: TrailerVideosService,
+     private router: Router) { }
 
     ngOnInit(): void {
       this.route.params
@@ -24,5 +26,15 @@ export class TrailersVideoDisplayComponent implements OnInit {
               this.video = this.trailerVideosService.getTrailerVideo(this.id);              
           }
       )
+
+      this.user = {
+        email: this.route.snapshot.params['email'],
+        firstname: this.route.snapshot.params['firstname'],
+        lastname: this.route.snapshot.params['lastname']
+      }
+    }
+
+    goToTrailers(){
+        this.router.navigate(['/trailers', this.user.email, this.user.firstname, this.user.lastname], {relativeTo: this.route});
     }
 }

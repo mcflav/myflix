@@ -1,0 +1,9 @@
+body{
+    background-image: url("/../../../assets/gallery.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color:red;
+    background-size: cover;
+    margin-top: -10px;
+    padding-top: 25px; 
+} 

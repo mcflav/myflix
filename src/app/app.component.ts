@@ -38,7 +38,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.isAuthenticated = !user ? false: true;
     });
 
-    this.dataStorageService.autoLogin();
+    //this.dataStorageService.autoLogin();
 
     // this.dataStorageService.fetchOrder().subscribe(
     //   resData => {

@@ -1,3 +1,24 @@
 h1{
-    margin-top:80px;
+    margin-top:0px;
+    background-color: blue;
+    padding-bottom: 5px;
+    color: lightblue;
+    padding-left: 25px;
+}
+
+body{
+    background-image: url("../../assets/homeImage.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-color:red;
+    background-size: cover;
+    padding-top: 25px;
+    margin-top: -10px;
+    
+}
+
+.container{
+    margin: 0 auto;
+    padding-bottom: 545px;
+    margin-top: 0px;
 }

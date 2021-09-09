@@ -13,7 +13,7 @@ import { SharedModule } from "../shared.module";
     imports: [
         FormsModule,
         SharedModule,
-        RouterModule.forChild([ { path: 'creators', component: CreatorsComponent, canActivate: [AuthGuard] },])
+        RouterModule.forChild([ { path: '', component: CreatorsComponent, canActivate: [AuthGuard] },])
     ]
 })
 export class CreatorsModule{}

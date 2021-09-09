@@ -6,9 +6,9 @@ import { TrailersVideoComponent } from "./trailers-video/trailers-video.componen
 import { TrailersComponent } from "./trailers.component";
 
 const routes: Routes = [
-    { path: 'trailers/:email/:firstname/:lastname', component: TrailersComponent, canActivate: [AuthGuard] },
+    { path: '', component: TrailersComponent, canActivate: [AuthGuard] },
     { path: 'videoTrailers', component: TrailersVideoComponent, children:[
-      { path: ':id', component: TrailersVideoDisplayComponent, canActivate: [AuthGuard] }
+      { path: ':id/:email/:firstname/:lastname', component: TrailersVideoDisplayComponent, canActivate: [AuthGuard] }
     ] }
 ]
 

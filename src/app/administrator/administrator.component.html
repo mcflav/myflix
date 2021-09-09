@@ -1,11 +1,75 @@
-<!DOCTYPE html>
-<html>
-<body>
-    <section>
-        <h2>System Administrator Page</h2>
-        <button [routerLink]="['/users']">View Registered Users</button>
-        
-    </section>
-</body>
-</html>
+<header>
+    <h3>
+      NDO Filmz
+    </h3>
+  </header>
+  <body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+        <!-- <div class="alert alert-danger" *ngIf="error">
+            <p>{{ error }}</p>
+        </div> -->
+        <app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
+        <div *ngIf="isLoading" style="text-align: center">
+            <app-loading-spinner></app-loading-spinner>
+        </div>
+        <form (ngSubmit)="onSubmit()" #f="ngForm" *ngIf="!isLoading">
+          <div
+            class="form-group"
+            id="user-data"
+            >
+            <h2>Administrator Log In</h2>
+            <div class="loginOptions">
+              <br>
+                <div class="form-group">
+                  <label for="username">Username:</label>
+                  <input
+                    type="text"
+                    id="username"
+                    class="form-control"
+                    ngModel
+                    name="username"
+                    required
+                    username
+                    #username="ngModel">
+                    <span class="help-block" *ngIf="!username.valid && username.touched">Please enter a valid username!</span>
+                </div>
+              <br>
+                <div class="form-group">
+                  <label for="password">Password:</label>
+                  <show-hide-password size="sm" btnStyle="primary" [btnOutline]="false">
+                  <input
+                    type="password"
+                    id="password"
+                    class="form-control"
+                    ngModel
+                    name="password"
+                    required
+                    #password="ngModel"><br>Show/Hide Password
+                  </show-hide-password>
+                  <span class="help-block" *ngIf="!password.valid && password.touched">Please enter a password!</span>
+                </div>
+              <br>
+              <button
+              class="btn btn-primary"
+              type="submit"
+              [disabled]="!f.valid"
+              >Login
+            </button> 
+            </div>
+        </div>
+            <div class="form-group">
+            <!-- <button
+              class="btn btn-primary"
+              type="submit"
+              [disabled]="!f.valid"
+              >Login
+            </button>  -->
+            </div>
+          </form>
+      </div>
+    </div>
+  </div>
+  </body>
 

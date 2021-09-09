@@ -1,17 +1,30 @@
-<div class="row">
-    <div class="col-xs-12">
-        <h3>NDO Films Movie Selection.</h3>
-        <hr>
-        <label>Title: {{ video.title }}</label><br>
-        <label>Producer: {{ video.producer }}</label><br>
-        <label>Director: {{ video.director }}</label><br>
-        <label>Actors: {{ video.actors }}</label><br>
-        <label>Description: {{ video.description }}</label>
-        <hr>        
-        <video controls width="820" height="440">
-            <source src= "{{ video.source }}"  type="video/mp4">
-            <!-- <source src="movie.ogg" type="video/ogg"> --> -->
-                Your browser does not support the video tag.
-        </video>
+<header>
+    <h2>
+        NDO Filmz Movie Selection
+    </h2>
+    <h3>
+        <a (click)="goToTrailers()" style="cursor: pointer;">back to trailers</a>
+    </h3>  
+</header>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12">
+                <label>Title: {{ video.title }}</label><br>
+                <label>Producer: {{ video.producer }}</label><br>
+                <label>Director: {{ video.director }}</label><br>
+                <label>Actors: {{ video.actors }}</label><br>
+                <label>Description: {{ video.description }}</label>
+                <br>
+                <div class=showVideo>
+                    <video controls width="820" height="440">
+                        <source src= "{{ video.source }}"  type="video/mp4">
+                        <!-- <source src="movie.ogg" type="video/ogg"> --> -->
+                            Your browser does not support the video tag.
+                    </video>
+                </div>        
+            </div>
+        </div>   
     </div>
-</div>
+</body>
+
