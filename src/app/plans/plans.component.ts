@@ -4,8 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { SubscriberService } from '../services/subscriber.service';
 import { Order } from '../models/order.model';
 import { DataStorageService } from '../services/data-storage.service';
-import { stringify } from '@angular/compiler/src/util';
-
 
 @Component({
   selector: 'app-plans',
@@ -30,7 +28,7 @@ export class PlansComponent implements OnInit {
   subscriptId;
   getSubscriptions = [];
   today = new Date();
-  
+
   constructor(private route: ActivatedRoute,
       private router: Router,
       private subscriberService: SubscriberService,
@@ -62,9 +60,6 @@ export class PlansComponent implements OnInit {
             console.log(this.currentPlanDate);
           }
         }
-        // if(this.currentPlanType !== 'noPlan'){
-        //    this.router.navigate(['../gallery', this.account.email, this.account.firstname, this.account.lastname])
-        // }
       })
    }
 
@@ -82,14 +77,14 @@ export class PlansComponent implements OnInit {
     const addOne = planDateForOne.getMonth();
     const oneMonthExpirationDate = planDateForOne;
     oneMonthExpirationDate.setMonth(1 + Number(addOne));
-    
+
 
     const addYear = planDateForYear.getMonth();
     const oneYearExpirationDate = planDateForYear;
     oneYearExpirationDate.setMonth(12 + Number(addYear));
 
     const planDateinDb = this.currentPlanDate;
-    
+
     if(this.currentPlanType === "1month" && this.today >= oneMonthExpirationDate){
       this.error = "Your 1 month subscription has expired. Please select a plan or select the option not to subscribe to a plan.";
     }else if(this.currentPlanType === "6months" && this.today >= sixMonthExpirationDate){
@@ -103,7 +98,7 @@ export class PlansComponent implements OnInit {
     } else {
 
     }
-  }   
+  }
 
   onSubmit(){
    this.error = null;
@@ -161,11 +156,10 @@ export class PlansComponent implements OnInit {
         this.planTotal = this.planCost - this.planDiscount;
       }
     }
-  
-  
+
+
 
   this.newOrder = new Order(this.planType, this.account.email, Number(this.planCost), Number(this.planDiscount), this.planDate.toString(), Number(this.planTotal));
-  // this.newOrder = new Order("noPlan", "nc2jax@hotmail.com", 20, 0, "07/12/2021", 20);
    this.subscriberService.addOrder(this.newOrder);
 
    const planDateForSix = new Date(this.currentPlanDate);
@@ -179,7 +173,7 @@ export class PlansComponent implements OnInit {
    const addOne = planDateForOne.getMonth();
    const oneMonthExpirationDate = planDateForOne;
    oneMonthExpirationDate.setMonth(1 + Number(addOne));
-         
+
    const addYear = planDateForYear.getMonth();
    const oneYearExpirationDate = planDateForYear;
    oneYearExpirationDate.setMonth(12 + Number(addYear));
@@ -219,7 +213,7 @@ export class PlansComponent implements OnInit {
         this.isLoading = false;
         if(this.planType === "noPlan"){
           this.router.navigate(['../trailers', this.account.email, this.account.firstname, this.account.lastname]);
-          this.orderSubmitted = true; 
+          this.orderSubmitted = true;
         }else{
           this.router.navigate(['../gallery', this.account.email, this.account.firstname, this.account.lastname]);
           this.orderSubmitted = true;
@@ -239,5 +233,5 @@ export class PlansComponent implements OnInit {
 
   onHandleError(){
     this.error = null;
-}
+  }
 }

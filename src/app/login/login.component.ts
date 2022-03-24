@@ -14,16 +14,13 @@ export class LoginComponent implements OnInit {
   @ViewChild('f') loginForm: NgForm;
   users = [];
   subscriptions = [];
-  user = {
+  login = {
     email: '',
-    password: '',
-    firstname: '',
-    lastname: ''
+    password: ''
   }
-   
-  //id;
-  validLogin = false;
-  showInvalidMessage = false;
+  firstname;
+  lastname;
+  id;
   userValid = false;
   isLoading = false;
   error: string = null;
@@ -36,8 +33,6 @@ export class LoginComponent implements OnInit {
   oneMonthExpirationDate
   sixMonthExpirationDate
   yearExpirationDate
- 
- //subscriber: {planType: string, email: string, planCost: number, planDiscount: number, planDate: string, planTotal: number}
 
   constructor( private router: Router,
     private route: ActivatedRoute,
@@ -54,19 +49,15 @@ export class LoginComponent implements OnInit {
       },
       errorMessage => {
           this.error = errorMessage;
-      });       
+      });
   }
 
   onSubmit(){
-
-   // this.router.navigate(['../gallery', "test1@gmail.com", "firstname", "lastname"], {relativeTo: this.route});
-         
     this.hasPlan = false;
     this.isLoading = true;
-    this.user.email = this.loginForm.value.email;
-    this.user.password = this.loginForm.value.password;
-
-    this.dataStorageService.validateUser(this.user.email, this.user.password)
+    this.login.email = this.loginForm.value.email;
+    this.login.password = this.loginForm.value.password;
+    this.dataStorageService.validateUser(this.login.email, this.login.password)
       .subscribe(data => {
           this.isLoading = false;
           this.error = null;
@@ -81,30 +72,29 @@ export class LoginComponent implements OnInit {
   isUserValid(isValid: boolean){
       this.userValid = isValid;
       if(this.userValid){
-          this.validLogin = true;
-          this.showInvalidMessage = false;
           this.users = this.usersService.getUsers();
           for(var i = 0; i < this.users.length; i++){
-              if(this.users[i].email === this.user.email){
-                  this.user.firstname = this.users[i].firstname;
-                  this.user.lastname = this.users[i].lastname;
+              if(this.users[i].email === this.login.email){
+                  this.id = this.users[i]._id;
+                  this.firstname = this.users[i].firstname;
+                  this.lastname = this.users[i].lastname;
               }
           }
 
-          this.dataStorageService.fetchSubscription(this.user.email)
+          this.dataStorageService.fetchSubscription(this.login.email)
             .subscribe(data => {
                 const today = new Date();
-                             
-                             
+
+
                this.subscriberService.setOrder(data);
                 this.subscriptions = this.subscriberService.getOrders();
                 for(var i = 0; i < this.subscriptions.length; i++){
                     console.log(this.subscriptions[i].planType);
-                    if(this.subscriptions[i].email === this.user.email && this.subscriptions[i].planType !== "noPlan"){
+                    if(this.subscriptions[i].email === this.login.email && this.subscriptions[i].planType !== "noPlan"){
                         this.planDateForSix = new Date(this.subscriptions[i].planDate);
                         this.planDateForOne = new Date(this.subscriptions[i].planDate);
                         this.planDateForYear = new Date(this.subscriptions[i].planDate);
-                     
+
                         const addSix = this.planDateForSix.getMonth();
                         this.sixMonthExpirationDate = this.planDateForSix;
                         this.sixMonthExpirationDate.setMonth(6 + Number(addSix));
@@ -124,27 +114,25 @@ export class LoginComponent implements OnInit {
                         }else if(this.subscriptions[i].planType === "1Year"){
                             this.planType = "1yr"
                         }
-                     
+
                         this.hasPlan = true;
-                        
+
                     }
                 }
 
-                //this.router.navigate(['../gallery', this.user.email, this.user.firstname, this.user.lastname], {relativeTo: this.route});
-                               
                 if(this.hasPlan === true && this.planType === "1mth" && this.today >= this.oneMonthExpirationDate){
-                    this.router.navigate(['../plans', this.user.email, this.user.firstname, this.user.lastname], {relativeTo: this.route});
+                    this.router.navigate(['../plans', this.login.email, this.firstname, this.lastname], {relativeTo: this.route});
                 }else if(this.hasPlan === true && this.planType === "6mths" && this.today >= this.sixMonthExpirationDate){
-                    this.router.navigate(['../plans', this.user.email, this.user.firstname, this.user.lastname], {relativeTo: this.route});
+                    this.router.navigate(['../plans', this.login.email, this.firstname, this.lastname], {relativeTo: this.route});
                 }else if(this.hasPlan === true && this.planType === "1yr" && this.today >= this.yearExpirationDate){
-                    this.router.navigate(['../plans', this.user.email, this.user.firstname, this.user.lastname], {relativeTo: this.route});
+                    this.router.navigate(['../plans', this.login.email, this.firstname, this.lastname], {relativeTo: this.route});
                 }else if(this.hasPlan === true){
-                   this.router.navigate(['../gallery', this.user.email, this.user.firstname, this.user.lastname], {relativeTo: this.route});
+                   this.router.navigate(['../gallery', this.login.email, this.firstname, this.lastname], {relativeTo: this.route});
                 } else {
-                    this.router.navigate(['../plans', this.user.email, this.user.firstname, this.user.lastname], {relativeTo: this.route});
+                    this.router.navigate(['../plans', this.login.email, this.firstname, this.lastname], {relativeTo: this.route});
                 }
             },
-            errorMessage => { 
+            errorMessage => {
                 this.error = errorMessage;
             });
         }

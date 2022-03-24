@@ -11,7 +11,6 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  //collapsed = true;
   account: {email: string, firstname: string, lastname: string};
   isAuthenticated = false;
   private userSub: Subscription;
@@ -37,17 +36,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.userSub = this.dataStorageService.user.subscribe(user => {
       this.isAuthenticated = !user ? false: true;
     });
-
-    //this.dataStorageService.autoLogin();
-
-    // this.dataStorageService.fetchOrder().subscribe(
-    //   resData => {
-    //     console.log(resData);
-    //    // this.order = resData;
-    //     resData
-    //   }
-    //   );
-
   }
 
   onLogOut(){
