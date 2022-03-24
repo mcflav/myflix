@@ -56,8 +56,17 @@
                   "maximumError": "10kb"
                 }
               ]
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
             }
-          }
+          },
+          "defaultConfiguration": "production"
         },
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
@@ -65,12 +74,15 @@
             "browserTarget": "myflix:build",
             "proxyConfig": "src/proxy.conf.json"
           },
-          
           "configurations": {
             "production": {
               "browserTarget": "myflix:build:production"
+            },
+            "development": {
+              "browserTarget": "myflix:build:development"
             }
-          }
+          },
+            "defaultConfiguration": "development"
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -113,12 +125,8 @@
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
             "devServerTarget": "myflix:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "myflix:serve:production"
-            }
           }
+          
         }
       }
     }
