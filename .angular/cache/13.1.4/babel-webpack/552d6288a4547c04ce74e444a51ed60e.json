@@ -1,0 +1,1 @@
+{"ast":null,"code":"export class Order {\n  constructor(planType, email, planCost, planDiscount, planDate, planTotal) {\n    this.planType = planType;\n    this.email = email;\n    this.planCost = planCost;\n    this.planDiscount = planDiscount;\n    this.planDate = planDate;\n    this.planTotal = planTotal;\n  }\n\n}","map":null,"metadata":{},"sourceType":"module"}
