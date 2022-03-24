@@ -4,16 +4,13 @@
     </h2>
     <h3>
         <a (click)="onGoToVideos()" style="cursor: pointer;">back to videos</a>
-    </h3>  
+    </h3>
 </header>
 <body>
     <div class="container">
         <div class="row">
         <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-    <!-- <div class="alert alert-danger" *ngIf="error">
-        <p>{{ error }}</p>
-    </div> -->
-    <app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
+    <app-alert [message]="error" *ngIf="error" (close)="onHandleError()" style="color: red"></app-alert>
     <div *ngIf="isLoading" style="text-align: center">
         <app-loading-spinner></app-loading-spinner>
     </div>
@@ -23,44 +20,44 @@
         <div class="plansMenu">
             <div class="form-group">
             <section id='subscription'>
-                <p><strong>One Level Subscription - </strong> $5 or $4 with promo code. Pay 6 months in 
-                    advance - $30 ($24 with promo code) or 
+                <p><strong>One Level Subscription - </strong> $5 or $4 with promo code. Pay 6 months in
+                    advance - $30 ($24 with promo code) or
                     1 year in adance - $60 ($48 with promo code)
                 </p>
             </section>
             <section id='level' class="form-group">
                 <input
                     type="radio"
-                    value="1month" 
-                    name="level" 
-                    required   
+                    value="1month"
+                    name="level"
+                    required
                     ngModel
                     #level="ngModel"
-                    (change)="changePlan($event)"> 1 mo. All Access - $5.00 ($4.00 w/ Promo Code) <br> 
-                <input 
-                    type="radio" 
-                    value="6months"
-                    name="level" 
-                    required
-                    ngModel 
-                    #level="ngModel" 
-                    (change)="changePlan($event)"> 6 mo. All Access - $30.00 ($24.00 w/ Promo Code) <br>
-                <input 
+                    (change)="changePlan($event)"> 1 mo. All Access - $5.00 ($4.00 w/ Promo Code) <br>
+                <input
                     type="radio"
-                    value="1year" 
+                    value="6months"
                     name="level"
-                    required 
-                    ngModel 
+                    required
+                    ngModel
+                    #level="ngModel"
+                    (change)="changePlan($event)"> 6 mo. All Access - $30.00 ($24.00 w/ Promo Code) <br>
+                <input
+                    type="radio"
+                    value="1year"
+                    name="level"
+                    required
+                    ngModel
                     #level="ngModel"
                     (change)="changePlan($event)"> 1 yr. All Access - $60.00 ($48.00 w/ Promo Code) <br>
-                <input 
+                <input
                     type="radio"
-                    value="noPlan" 
+                    value="noPlan"
                     name="level"
-                    required 
-                    ngModel 
+                    required
+                    ngModel
                     #level="ngModel"
-                    (change)="changePlan($event)"> I do not want to subscribe to a plan today. 
+                    (change)="changePlan($event)"> I do not want to subscribe to a plan today.
                 <br>
             </section>
             <br>
@@ -78,8 +75,9 @@
             </section>
             <br>
             <label for="promoCode">Promo Code: </label>
-            <input 
-                type="text" 
+            <input
+                type="text"
+                onfocus="this.value=''"
                 id="promoCode"
                 ngModel
                 name="promoCode"

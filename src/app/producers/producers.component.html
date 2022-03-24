@@ -7,7 +7,7 @@
 <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-        <app-alert [message]="error" *ngIf="error" (close)="onHandleError()"></app-alert>
+        <app-alert [message]="error" *ngIf="error" (close)="onHandleError()" style="color: red"></app-alert>
         <div *ngIf="isLoading" style="text-align: center">
             <app-loading-spinner></app-loading-spinner>
         </div>
@@ -22,6 +22,7 @@
             <label for="email">Email:</label>
             <input
               type="email"
+              onfocus="this.value=''"
               id="email"
               class="form-control"
               ngModel
@@ -36,6 +37,7 @@
             <label for="firstname">Firstname:</label>
             <input
               type="string"
+              onfocus="this.value=''"
               id="firstname"
               class="form-control"
               ngModel
@@ -50,6 +52,7 @@
             <label for="lastname">Lastname:</label>
             <input
               type="string"
+              onfocus="this.value=''"
               id="lastname"
               class="form-control"
               ngModel
@@ -64,6 +67,7 @@
             <label for="company">Company Name:</label>
             <input
               type="string"
+              onfocus="this.value=''"
               id="company"
               class="form-control"
               ngModel
@@ -78,6 +82,7 @@
             <label for="password">Password:</label>
             <input
               type="password"
+              onfocus="this.value=''"
               id="password"
               class="form-control"
               ngModel
@@ -91,6 +96,7 @@
             <label for="passwordConfirm">Confirm Password:</label>
             <input
               type="password"
+              onfocus="this.value=''"
               id="passwordConfirm"
               class="form-control"
               ngModel
@@ -107,7 +113,7 @@
               type="submit"
               [disabled]="!f.valid"
               >Submit
-            </button> 
+            </button>
             </div>
           </form>
       </div>

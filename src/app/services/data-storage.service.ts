@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UsersService } from '../services/users.service';
 import { SubscriberService } from '../services/subscriber.service';
 import { Users } from '../models/users.model';
-import { User } from '../models/user.model';
+import { ValidateUser } from '../models/validateUser.model';
 import { Order } from '../models/order.model';
 import { throwError, BehaviorSubject } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -34,7 +34,7 @@ interface SubscriptionResponseData {
 
 @Injectable({providedIn: 'root'})
 export class DataStorageService{
-    user = new BehaviorSubject<User>(null);
+    user = new BehaviorSubject<ValidateUser>(null);
     subscriptions: [] = [];
     private tokenExpirationTimer: any;
     private _expirationDate = new Date(
@@ -45,7 +45,7 @@ export class DataStorageService{
         private usersService: UsersService,
         private subscriberService: SubscriberService,
         private router: Router){}
-        
+
     storeUser(user: Users){
         const body = user;
         return this.http.post<UserResponseData>('https://sheltered-cliffs-22371.herokuapp.com/api/v1/users',
@@ -61,7 +61,7 @@ export class DataStorageService{
     updateSubscription(id: string, order: Order){
         const body = order;
         return this.http.put<SubscriptionResponseData>('https://sheltered-cliffs-22371.herokuapp.com/api/v1/subscription/' + id,
-        body).pipe(catchError(this.handleError)); 
+        body).pipe(catchError(this.handleError));
 
     }
 
@@ -103,7 +103,7 @@ export class DataStorageService{
             return;
         }
 
-        const loadedUser = new User(
+        const loadedUser = new ValidateUser(
             userData.auth,
             userData._token,
             this._expirationDate
@@ -137,10 +137,10 @@ export class DataStorageService{
             new Date().getTime() + 86400 * 1000
         );
 
-        const user = new User(
+        const user = new ValidateUser(
             auth,
             token,
-            expirationDate    
+            expirationDate
         );
 
         this.user.next(user);
@@ -158,7 +158,7 @@ export class DataStorageService{
         if(errorRes.status === 400 || (errorRes.status === 401 && errorRes.error.token !== null) ||
         (errorRes.status === 401 && errorRes.error.token === null)){
             errorMessage = "Invalid Username or Password.";
-        } 
+        }
         return throwError(errorMessage);
     }
 }
